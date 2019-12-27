@@ -1,0 +1,15 @@
+[Unit]
+Description=qBittorrent Daemon Service
+Requires=network.target repertory.service siad.service
+After=repertory.service siad.service
+# not working:
+RequiresMountsFor=/home/USER/siadrive
+
+[Service]
+User=ether
+Group=ether
+ExecStart=/usr/bin/qbittorrent-nox
+# ExecStop=/usr/bin/killall -w qbittorrent-nox
+
+[Install]
+WantedBy=multi-user.target

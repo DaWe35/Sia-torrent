@@ -1,0 +1,11 @@
+[Unit]
+Description=Sia Daemon
+
+[Service]
+ExecStart=/home/USER/sia/siad
+WorkingDirectory=/home/USER/sia/
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

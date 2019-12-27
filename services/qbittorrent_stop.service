@@ -1,0 +1,13 @@
+[Unit]
+Description=Shutdown qBittorrent before umount
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+User=ether
+Group=ether
+ExecStart=/usr/bin/killall -w qbittorrent-nox
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
