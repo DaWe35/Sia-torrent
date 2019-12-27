@@ -156,7 +156,7 @@ sudo systemctl enable qbittorrent_stop
 
 Now, you can add .torrent files to qBittorrent, and start download to Sia. After files are downloaded , they will be disapper from the local disk (repertory has 20 GB default cache). You can check file with `siac renter ls -v optional/sia_folder_path`.
 
-[Torrent seeding from Sia](https://raw.githubusercontent.com/DaWe35/Sia-torrent/master/assets/torrent.jpg)
+![Torrent seeding from Sia](https://raw.githubusercontent.com/DaWe35/Sia-torrent/master/assets/torrent.jpg)
 
 # Notes
 
