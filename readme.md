@@ -10,10 +10,10 @@ Requirements:
 ### Table of contents
 
 * [Install Sia](#install-sia)
-* [Setup repertory](#setup-repertory)
+* [Setup repertory](#setup-repertory-and-service)
 * [Install qBittorrent-nox](#install-qBittorrent-nox)
 
-# Install Sia and service
+# Install Sia
 
 You can install Sia-UI if you have graphical interface ([read the Sia renter guide here](https://siasetup.info/guides/renting_on_sia)), but I decided to use Sia daemon on my VPS, so here is the setup for that.
 
