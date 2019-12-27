@@ -4,8 +4,8 @@ DefaultDependencies=no
 Before=shutdown.target reboot.target halt.target
 
 [Service]
-User=ether
-Group=ether
+User=USER
+Group=USER
 ExecStart=/usr/bin/killall -w qbittorrent-nox
 Type=oneshot
 

@@ -6,8 +6,8 @@ After=repertory.service siad.service
 RequiresMountsFor=/home/USER/siadrive
 
 [Service]
-User=ether
-Group=ether
+User=USER
+Group=USER
 ExecStart=/usr/bin/qbittorrent-nox
 # ExecStop=/usr/bin/killall -w qbittorrent-nox
 

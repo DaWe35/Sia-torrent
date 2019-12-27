@@ -12,6 +12,7 @@ Requirements:
 * [Install Sia](#install-sia)
 * [Setup repertory](#setup-repertory-and-service)
 * [Install qBittorrent-nox](#install-qBittorrent-nox)
+* [Notes](#notes)
 
 # Install Sia
 
@@ -30,6 +31,8 @@ chmod +x /home/USER/sia/siac
 Of cource, it shows an error, because you didn't started `siad`. Before starting it, we'll create a service for this. Create a file, and paste the contents of `services/siad.service` into it (of yource, change every USER to your username).
 
 `sudo nano /etc/systemd/system/siad.service`
+
+After you pasted the content, press CTRL+o then ENTER to save the changes. Press CTRL+x to exit from nano file editor.
 
 Then reload the service daemon, start & enable siad:
 
@@ -110,7 +113,56 @@ Now repertory mounted your Sia drive to /home/USER/siadrive, so you can `cd siad
 
 # Install qBittorrent-nox
 
+[Source](https://github.com/qbittorrent/qBittorrent/wiki/Setting-up-qBittorrent-on-Ubuntu-server-as-daemon-with-Web-interface-(15.04-and-newer))
+
 ``` bash
 sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
 sudo apt-get update && sudo apt-get install qbittorrent-nox
+
+# Run qBittorrent:
+qbittorrent-nox
 ```
+
+qBittorrent started, you can login with here: http://ip-of-server:8080
+
+```
+User: admin
+Password: adminadmin
+```
+> If you have firewall, enable 8080 port
+
+Now, `exit` from qbittorrent-nox, and create a service for auto startup.
+
+### Create the service:
+
+`sudo nano /etc/systemd/system/qbittorrent.service`
+
+Paste "/service/qbittorrent.service" contents here (change USER to your username).
+
+You need to create another service, which stops the qBittorrent daemon when you shutdown/reboot your machine. If you forgot this, repertory will umounted before torrent seeding ends, so qBittorrent will re-check all files after every boot (expensive, useless, and slow).
+
+`sudo nano /etc/systemd/system/qbittorrent_stop.service`
+
+and paste "/service/qbittorrent_stop.service" contents here (change USER).
+
+``` bash
+# Reload systemd:
+sudo systemctl daemon-reload
+sudo systemctl start qbittorrent
+sudo systemctl enable qbittorrent
+sudo systemctl start qbittorrent_stop
+sudo systemctl enable qbittorrent_stop
+```
+
+Now, you can add .torrent files to qBittorrent, and start download to Sia. After files are downloaded , they will be disapper from the local disk (repertory has 20 GB default cache). You can check file with `siac renter ls -v optional/sia_folder_path`
+
+# Notes
+
+### Contributing
+
+We're open for pull requests, if you find something we forgot, just open a new issue ;)
+
+### Thank you
+
+@ScottG (repertory)
+[Sia team](https://sia.tech)
