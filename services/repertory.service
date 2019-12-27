@@ -2,8 +2,8 @@
 Description=Repertory mount siadrive Sia folder
 
 [Service]
-User=ether
-Group=ether
+User=USER
+Group=USER
 ExecStart=/home/USER/repertory_service.sh
 ExecStop=umount /home/USER/siadrive
 Type=oneshot

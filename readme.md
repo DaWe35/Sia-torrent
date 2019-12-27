@@ -13,7 +13,7 @@ Requirements:
 * [Setup repertory](#setup-repertory)
 * [Install qBittorrent-nox](#install-qBittorrent-nox)
 
-# Install Sia
+# Install Sia and service
 
 You can install Sia-UI if you have graphical interface ([read the Sia renter guide here](https://siasetup.info/guides/renting_on_sia)), but I decided to use Sia daemon on my VPS, so here is the setup for that.
 
@@ -60,14 +60,51 @@ It creates a nymbolic link and adds the `siac` command to your user path. Note, 
 
 If not works, try to open a new terminal/screen.
 
+Create a wallet:
+
+`siac wallet init`
+
+> Copy down the seed to a safe location! You will need this to unlock your wallet.
+
 Cool, now you can check your balance:
 
-`siac wallet`
+Unlock your wallet:
 
-> If your wallet is locked, unlock with `siac wallet unlock`, and then paste your passphrase. It could take some seconds.
+`siac wallet unlock`
+ 
+ and then paste your seed. It could take some seconds.
 
 > If your balance is too low, generate a new address with `siac wallet address`, and send some funds to it.
 
 You need to buy storage on Sia, so type `siac renter setallowance`, and follow the instructions. After allowance formed (10-20 minutes), you can start uploading.
 
-# Setup repertory
+Check how many contracts you have (recommended: 50, you need 30+ for upload)
+
+`siac renter`
+
+Check your allowance:
+
+`siac renter allowance`
+
+Show alerts:
+
+`siac alerts`
+
+# Setup repertory and service
+
+[Repertory](https://bitbucket.org/blockstorage/repertory/) allows you to mount Sia storage via FUSE, like a normal forder in your system. Download the latest release from [BitBucket](https://bitbucket.org/blockstorage/repertory/downloads/), and place it to your main folder (/home/USER). Also place here the `repertory_service.sh` file from this repo, but make sure you modified all "USER" to your current username.
+
+You can create a service for repertory (which calls repertory_service.sh on startup):
+
+`sudo nano /etc/systemd/system/repertory.service`
+
+and then paste "service/repertory.service" from this repo (change the four USER string to your username again). Start:
+
+`sudo systemctl start repertory`
+
+Enable repertory on startup:
+
+`sudo systemctl enable repertory`
+
+Now repertory mounted your Sia drive to /home/USER/siadrive, so you can `cd siadrive` and create some files. If succeed, check the new file listed `siac renter ls -v`.
+
