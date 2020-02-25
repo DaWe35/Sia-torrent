@@ -2,7 +2,8 @@
 
 Setup documentation for seeding torrents from Sia decentralized blockchain cloudstorage.
 
-**Disclaimer:** Siad is not capable to seed torrents at sufficient speed (tested with v1.4.2.0)
+**Disclaimer:** Siad is not capable to seed torrents at sufficient speed
+**Current speed** ~ 100 KB/s (tested with v1.4.2.0)
 
 Requirements:
 - Ubuntu 15.04+ with root access
